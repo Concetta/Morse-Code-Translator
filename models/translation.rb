@@ -1,3 +1,5 @@
+require 'pry'
+
 class Translation
   INTERNATIONAL_MORSE_CODE = {
     'A' => '.-',
@@ -53,6 +55,7 @@ class Translation
   end
 
   def morse_code_conversion
+    # accepted_char = []
     message = @message.upcase
     letters = message.split('')
     letter_split = []
@@ -75,39 +78,71 @@ class Translation
       next_code = codes[n + 1]
       until code.empty?
         if code[0] == '.'
+          result << counting_dots(code)
           count_dots = code.split('-')
-          remove_slashs = count_dots[0].split('/')
           x =  count_dots[0].length
           code = code[x.to_i..-1]
-          if count_dots[0].split('').last == '/'
-            result << remove_slashs[0].count('.').to_s + '/'.to_s
-          elsif remove_slashs.count == 2
-            result << remove_slashs[0].count('.').to_s +
-                      '/'.to_s +
-                      remove_slashs[1].count('.').to_s
-          else
-            result << x
-          end
         else
+          result << counting_dashes(code)
           count_dashes = code.split('.')
-          remove_slashs = count_dashes[0].split('/')
           x =  count_dashes[0].length
           code = code[x.to_i..-1]
-          if count_dashes[0].split('').last == '/'
-            result << dash_count(remove_slashs[0].count('-')).to_s +
-                      '/'.to_s
-          elsif remove_slashs.count == 2
-            result << dash_count(remove_slashs[0].count('-')).to_s +
-                      '/'.to_s +
-                      dash_count(remove_slashs[1].count('-')).to_s
-          else
-            result << dash_count(x.to_i)
-          end
         end
       end
       result << '|' unless next_code.nil?
     end
     result.join('')
+  end
+
+  private
+
+  def counting_dots(code)
+    count_dots = code.split('-')
+    remove_slashs = count_dots[0].split('/')
+    x =  count_dots[0].length
+    if count_dots[0].split('').last == '/'
+      remove_slashs[0].count('.').to_s + '/'.to_s
+    elsif remove_slashs.count == 2
+      remove_slashs[0].count('.').to_s +
+      '/'.to_s +
+      remove_slashs[1].count('.').to_s
+    else
+      x
+    end
+  end
+
+  def counting_dashes(code)
+    count_dashes = code.split('.')
+    remove_slashs = count_dashes[0].split('/')
+    x =  count_dashes[0].length
+    code = code[x.to_i..-1]
+    if count_dashes[0].split('').last == '/'
+      dash_count(remove_slashs[0].count('-')).to_s +
+      '/'.to_s
+    elsif remove_slashs.count == 2
+      dash_count(remove_slashs[0].count('-')).to_s +
+      '/'.to_s +
+      dash_count(remove_slashs[1].count('-')).to_s
+    else
+      dash_count(x.to_i)
+    end
+  end
+
+  def counting_elements(code, item)
+    count = code.split('.')
+    remove_slashs = count_dashes[0].split('/')
+    x =  count_dashes[0].length
+    code = code[x.to_i..-1]
+    if count_dashes[0].split('').last == '/'
+      dash_count(remove_slashs[0].count('-')).to_s +
+      '/'.to_s
+    elsif remove_slashs.count == 2
+      dash_count(remove_slashs[0].count('-')).to_s +
+      '/'.to_s +
+      dash_count(remove_slashs[1].count('-')).to_s
+    else
+      dash_count(x.to_i)
+    end
   end
 
   def add_pipe(item, next_item, item_split)
