@@ -9,7 +9,8 @@ Usage:
 
 ```
 $ ruby run.rb peanuts
-1B1|1|1A|A1|2A|A|3
+Morse Code: .--.|.|.-|-.|..-|-|...
+Obfuscated Morse Code: 1B1|1|1A|A1|2A|A|3
 ```
 
 Features:
