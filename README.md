@@ -15,6 +15,4 @@ $ ruby run.rb peanuts
 Features:
 * Error handling for no input
 
-Repositories: 
-
-* Private: git@bitbucket.org/ConcettaBug/translation.git
+https://bitbucket.org/ConcettaBug/coding-samples/wiki/Home
