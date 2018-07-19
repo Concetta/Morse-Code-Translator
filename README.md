@@ -18,4 +18,3 @@ Features:
 Repositories: 
 
 * Private: git@bitbucket.org/ConcettaBug/translation.git
-* Public: git@github.com:Concetta/Morse-Code-Translator.git
